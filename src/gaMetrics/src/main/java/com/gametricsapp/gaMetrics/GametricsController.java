@@ -33,7 +33,7 @@ public class GametricsController {
 		String totalCPU = "";
 		List<Cpu> cpus = components.cpus;
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		totalCPU = gson.toJson(cpus.get(0).sensors.loads.get(8));
+		totalCPU = gson.toJson(cpus.get(0).sensors.loads.get(8).value);
 		model.addAttribute("totalCPU", totalCPU);
 		return "cpu";
 	}
@@ -45,7 +45,7 @@ public class GametricsController {
 		String ramLoad = "";
 		List<Cpu> cpus = components.cpus;
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		ramLoad = gson.toJson(cpus.get(0).sensors.loads.get(9));
+		ramLoad = gson.toJson(cpus.get(0).sensors.loads.get(9).value);
 		model.addAttribute("ramLoad", ramLoad);
 		return "ram";
 	}
@@ -57,7 +57,7 @@ public class GametricsController {
 		String totalGPU = "";
 		List<Gpu> gpus = components.gpus;
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		totalGPU = gson.toJson(gpus.get(0));
+		totalGPU = gson.toJson(gpus.get(0).sensors.loads.get(3).value);
 		model.addAttribute("totalGPU", totalGPU);
 		return "gpu";
 	}
