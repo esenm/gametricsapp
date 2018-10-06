@@ -7,10 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.profesorfalken.jsensors.JSensors;
 import com.profesorfalken.jsensors.model.components.Components;
 import com.profesorfalken.jsensors.model.components.Cpu;
-import com.profesorfalken.jsensors.model.sensors.Fan;
+import com.profesorfalken.jsensors.model.components.Gpu;
 import com.profesorfalken.jsensors.model.sensors.Load;
 import com.profesorfalken.jsensors.model.sensors.Temperature;
 
@@ -24,34 +26,40 @@ public class GametricsController {
 		return "greeting";
 	}
 
-	@GetMapping("/cpus")
+	@GetMapping("/cpu")
 	public String cpus(Model model) {
 
 		Components components = JSensors.get.components();
-		String output = "";
+		String totalCPU = "";
 		List<Cpu> cpus = components.cpus;
-		if (cpus != null) {
-			for (final Cpu cpu : cpus) {
-				output += cpu.name + "\n";
-				if (cpu.sensors != null) {
-					output += "Sensors: \n";
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		totalCPU = gson.toJson(cpus.get(0).sensors.loads.get(8));
+		model.addAttribute("totalCPU", totalCPU);
+		return "cpu";
+	}
+	
+	@GetMapping("/ram")
+	public String ram(Model model) {
 
-					// Print temperatures
-					List<Temperature> temps = cpu.sensors.temperatures;
-					for (final Temperature temp : temps) {
-						output += temp.name + ": " + temp.value + " C\n";
-					}
-					
-					List<Load> loads = cpu.sensors.loads;
-					for (final Load load : loads) {
-						output += load.name + ": " + load.value;
-					}
-				}
-			}
-		}
+		Components components = JSensors.get.components();
+		String ramLoad = "";
+		List<Cpu> cpus = components.cpus;
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		ramLoad = gson.toJson(cpus.get(0).sensors.loads.get(9));
+		model.addAttribute("ramLoad", ramLoad);
+		return "ram";
+	}
+	
+	@GetMapping("/gpu")
+	public String gpu(Model model) {
 
-		model.addAttribute("cpunames", output);
-		return "cpus";
+		Components components = JSensors.get.components();
+		String totalGPU = "";
+		List<Gpu> gpus = components.gpus;
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		totalGPU = gson.toJson(gpus.get(0));
+		model.addAttribute("totalGPU", totalGPU);
+		return "gpu";
 	}
 
 }
