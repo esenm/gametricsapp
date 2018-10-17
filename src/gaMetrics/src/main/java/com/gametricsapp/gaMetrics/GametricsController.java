@@ -55,9 +55,7 @@ public class GametricsController {
 
 		Components components = JSensors.get.components();
 		String totalGPU = "";
-		List<Gpu> gpus = components.gpus;
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		totalGPU = gson.toJson(gpus.get(0).sensors.loads.get(3).value);
+		totalGPU = components.gpus.get(0).sensors.loads.get(3).value+"";
 		model.addAttribute("totalGPU", totalGPU);
 		return "gpu";
 	}
