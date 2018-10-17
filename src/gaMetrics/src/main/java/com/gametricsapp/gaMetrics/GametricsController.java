@@ -61,5 +61,10 @@ public class GametricsController {
 		model.addAttribute("totalGPU", totalGPU);
 		return "gpu";
 	}
+	
+	@GetMapping("/dashboard")
+	public String dashboard(Model model) {
+		return "dashboard";
+	}
 
 }

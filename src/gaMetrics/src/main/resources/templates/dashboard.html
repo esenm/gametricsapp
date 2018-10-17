@@ -3,10 +3,18 @@
 <head>
 	<title>Gametrics</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
-	<div id="stats">
-		<p th:text="${totalGPU}" />
+	<div id="statsGPU">	
 	</div>
+	
+	<script>
+	
+	 setInterval( function () {
+	 $( "#statsGPU" ).load( "/gpu #stats" );
+	 }, 7000 );
+		</script>
+	
 </body>
 </html>
