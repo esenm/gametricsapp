@@ -6,13 +6,21 @@
 	 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
-	<div id="statsGPU">	
+	<div>
+	GPU: <span id="statsGPU">	
+	</span>
+	CPU: <span id="statsCPU">	
+	</span>
+	RAM: <span id="statsRAM">	
+	</span>
 	</div>
 	
 	<script>
 	
 	 setInterval( function () {
 	 $( "#statsGPU" ).load( "/gpu #stats" );
+	 $( "#statsCPU" ).load( "/cpu #stats" );
+	 $( "#statsRAM" ).load( "/ram #stats" );
 	 }, 5000 );
 		</script>
 	
